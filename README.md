@@ -13,7 +13,7 @@ Final project for the Statistical Methods for Machine Learning course - Universi
     ├── data/   
         ├── data1
         └── data2
-    └── notebooks/
+    └── code/
         ├── notebook1
         └── notebook2
 ```
