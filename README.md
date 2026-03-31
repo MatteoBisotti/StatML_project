@@ -10,10 +10,9 @@ Final project for the Statistical Methods for Machine Learning course - Universi
 
 ## Repository structure
 ```bash
-    ├── data/   
-        ├── data1
-        └── data2
     └── code/
-        ├── notebook1
-        └── notebook2
+        ├── script
+            ├── plots.py
+            └── synthetic_data.py
+        └── main.ipynb
 ```
