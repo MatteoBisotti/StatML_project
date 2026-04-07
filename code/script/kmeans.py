@@ -15,6 +15,9 @@ class KMeans:
             raise ValueError("tol must be a positive integer.")
 
         self.centroids = None
+        self.n_iter = None
+        self.labels = None
+        self.inertia = None
 
     def initialize_centroids(self, X):
         """
@@ -71,3 +74,57 @@ class KMeans:
         """
         Compute the inertia 
         """
+        inertia = 0.0
+
+        for k in range(self.n_clusters):
+            clusters_points = X[labels==k]
+
+            if len(clusters_points) > 0:
+                inertia += np.sum((clusters_points - centroids[k])**2)
+
+        return inertia
+    
+    def fit(self, X):
+        """
+        Fit K-Means to the data
+        """
+        X = np.asarray(X, dtype=float)
+
+        centroids = self.initialize_centroids(X)
+        flag = False            # convergence flag
+
+        for iter in range(self.max_iter):
+            labels = self.assign_clusters(X, centroids)
+            new_centroids = self.update_centroids(X, labels, centroids)
+
+            centroids_shift = np.linalg.norm(new_centroids - centroids)
+            centroids = new_centroids
+
+            if centroids_shift <= self.tol:
+                self.n_iter = iter + 1
+                flag = True
+                break 
+        
+        if not flag:
+            self.n_iter = self.max_iter
+
+        self.centroids = centroids
+        self.labels = self.assign_clusters(X, self.centroids)
+        self.inertia = self.compute_inertia(X, self.labels, self.centroids)
+
+        return self
+    
+    def predict(self, X):
+        """
+        Assign cluster labels to new data using learned centroids
+        """
+        if self.centroids is None:
+            raise ValueError("The model has not been fitted yet.")
+        
+        X = np.asarray(X, dtype=float)
+
+        return self.assign_clusters(X, self.centroids)
+
+
+
+
