@@ -126,5 +126,10 @@ class KMeans:
         return self.assign_clusters(X, self.centroids)
 
 
-
+class KMeansPlusPlus(KMeans):
+    def initialize_centroids(self, X):
+        """
+        Initialize centroids using the k-means++ strategy
+        """
+        
 
