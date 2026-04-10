@@ -13,6 +13,7 @@ Final project for the Statistical Methods for Machine Learning course - Universi
     └── code/
         ├── script
             ├── plots.py
+            ├── kmeans.py           # class Kmeans and KmeansPlusPlus
             └── synthetic_data.py
         └── main.ipynb
 ```

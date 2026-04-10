@@ -1,6 +1,6 @@
 import numpy as np
 
-class KMeans:
+class Kmeans:
     def __init__(self, n_clusters, max_iter, tol, random_state):
         self.n_clusters = n_clusters
         self.max_iter = max_iter
@@ -12,7 +12,7 @@ class KMeans:
         if max_iter <= 0:
             raise ValueError("max_iter must be a positive integer.")
         if tol <= 0:
-            raise ValueError("tol must be a positive integer.")
+            raise ValueError("tol must be a positive number.")
 
         self.centroids = None
         self.n_iter = None
@@ -25,7 +25,8 @@ class KMeans:
         """
         n_samples = len(X)
 
-        indices = np.random.choice(n_samples, size=self.n_clusters, replace=False)
+        rng = np.random.default_rng(self.random_state)
+        indices = rng.choice(n_samples, size=self.n_clusters, replace=False)
         centroids = X[indices].copy()
         return centroids
     
@@ -126,10 +127,33 @@ class KMeans:
         return self.assign_clusters(X, self.centroids)
 
 
-class KMeansPlusPlus(KMeans):
+class KmeansPlusPlus(Kmeans):
     def initialize_centroids(self, X):
         """
         Initialize centroids using the k-means++ strategy
         """
+        n_samples = len(X)
+
+        rng = np.random.default_rng(self.random_state)
+
+        first_idx = rng.choice(n_samples)
+        centroids = [X[first_idx].copy()]   # first random centroid
+
+        for _ in range(1, self.n_clusters):
+            distances = self.euclidean_distances(X, np.array(centroids))
+
+            min_distances = np.min(distances, axis=1)
+
+            total = np.sum(min_distances)
+
+            probabilities = min_distances/total 
+
+            next_idx = rng.choice(n_samples, p=probabilities)
+            centroids.append(X[next_idx].copy())
+        
+        return np.array(centroids)
+
+
+
         
 
