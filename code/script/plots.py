@@ -3,10 +3,13 @@ import numpy as np
 
 # plot synthetic points 
 def plot_synthetic_points(X, y, title):
+    plt.figure(figsize=(12,8))
     plt.scatter(X[:, 0], X[:, 1], c=y, s=25)
     plt.title(title)
     plt.xlabel("Feature 1")
     plt.ylabel("Feature 2")
+    plt.show()
+
 
 def plot_kmeans_result(X, labels, centroids, init):
     plt.figure(figsize=(6,6))
