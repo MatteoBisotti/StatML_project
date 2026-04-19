@@ -114,17 +114,6 @@ class Kmeans:
         self.inertia = self.compute_inertia(X, self.labels, self.centroids)
 
         return self
-    
-    def predict(self, X):
-        """
-        Assign cluster labels to new data using learned centroids
-        """
-        if self.centroids is None:
-            raise ValueError("The model has not been fitted yet.")
-        
-        X = np.asarray(X, dtype=float)
-
-        return self.assign_clusters(X, self.centroids)
 
 
 class KmeansPlusPlus(Kmeans):
@@ -152,8 +141,3 @@ class KmeansPlusPlus(Kmeans):
             centroids.append(X[next_idx].copy())
         
         return np.array(centroids)
-
-
-
-        
-

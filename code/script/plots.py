@@ -48,7 +48,6 @@ def plot_iterations(n_iter_kmeans, n_iter_kmeanspp):
                 tick_labels=["K-Means", "K-Means++"])
     plt.ylabel("Number of iterations")
     plt.title("Iterations to convergence")
-    plt.grid(axis="y", alpha=0.3)
     plt.ylim(0)
     plt.tight_layout()
     plt.show()
@@ -66,7 +65,6 @@ def plot_strip(inertias_kmeans, inertias_kmeanspp):
     plt.xticks([0, 1], ["K-Means", "K-Means++"])
     plt.ylabel("Inertia")
     plt.title("Inertia values across runs")
-    plt.legend()
     plt.tight_layout()
     plt.show()
 
@@ -168,4 +166,11 @@ def plot_best_worst_comparison(
     axes[1, 1].set_ylabel("Feature 2")
 
     plt.tight_layout()
+    plt.show()
+
+def boxplot(inertias_kmeans, inertias_kmeanspp):
+    plt.figure(figsize=(6,5))
+
+    plt.boxplot([inertias_kmeans, inertias_kmeanspp], labels=['K-Means', 'K-Means++'])
+
     plt.show()
