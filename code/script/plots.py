@@ -1,6 +1,7 @@
 import matplotlib.pyplot as plt
 import numpy as np
 
+
 # plot synthetic points 
 def plot_synthetic_points(X, y, title):
     plt.figure(figsize=(12,8))
@@ -11,14 +12,7 @@ def plot_synthetic_points(X, y, title):
     plt.show()
 
 
-def plot_kmeans_result(X, labels, centroids, init):
-    plt.figure(figsize=(6,6))
-    plt.scatter(X[:,0], X[:,1], c=labels, cmap='viridis', s=20)
-    plt.scatter(centroids[:,0], centroids[:,1], c='red', marker='x', s=100)
-
-    plt.title("KMeans result ("+init+")")
-    plt.show()
-
+# print kmeans and kmeans++ results
 def results_kmeans_kmeanspp(
         X,
         inertias_kmeans,
@@ -41,7 +35,9 @@ def results_kmeans_kmeanspp(
     print(f"Min inertia     : {np.min(inertias_kmeanspp):.4f}")
     print(f"Max inertia     : {np.max(inertias_kmeanspp):.4f}")
     print(f"Mean iterations : {np.mean(n_iters_kmeanspp):.2f}")
-        
+
+
+# plot boxplot on number of iterations
 def plot_iterations(n_iter_kmeans, n_iter_kmeanspp):
     plt.figure(figsize=(6, 5))
     plt.boxplot([n_iter_kmeans, n_iter_kmeanspp],
@@ -52,6 +48,8 @@ def plot_iterations(n_iter_kmeans, n_iter_kmeanspp):
     plt.tight_layout()
     plt.show()
 
+
+# plot strip plot to visualize and compare the distribution of inertias
 def plot_strip(inertias_kmeans, inertias_kmeanspp):
     rng = np.random.default_rng(42)
 
@@ -68,6 +66,8 @@ def plot_strip(inertias_kmeans, inertias_kmeanspp):
     plt.tight_layout()
     plt.show()
 
+
+# plot best and worst run for kmeans and kmeans++
 def plot_best_worst_comparison(
     X,
     inertias_kmeans,
@@ -168,6 +168,8 @@ def plot_best_worst_comparison(
     plt.tight_layout()
     plt.show()
 
+
+# plot boxplot on inertias 
 def boxplot(inertias_kmeans, inertias_kmeanspp):
     plt.figure(figsize=(6,5))
 
